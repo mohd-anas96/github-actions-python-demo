@@ -1,2 +1,5 @@
-print("Hello from Python app!")
-raise Exception("Fail test")
+def add(a, b):
+    return a + b
+
+if __name__ == "__main__":
+    print(add(2, 3))
