@@ -2,23 +2,25 @@ name: Python CI/CD Pipeline
 
 on:
   push:
-  pull_request:
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+      - run: pip install -r requirements.txt
+      - run: pytest
 
-      - name: Run tests
-        run: pytest
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Simulate deployment
+        run: echo "Deploying app..."
